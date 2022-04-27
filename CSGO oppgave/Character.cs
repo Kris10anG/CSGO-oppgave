@@ -16,6 +16,7 @@ namespace CSGO_oppgave
         {
             Name = name;
             IsDead = isDead;
+            rand = new Random();
         }
 
         public static bool IsSuccessful(int maxValue)

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CSGO_oppgave
@@ -14,30 +16,41 @@ namespace CSGO_oppgave
         {
             Game = game;
         }
-        private void DefuseBomb()
+        public void DefuseBomb()
         {
-            Task.Delay(5000);
+            Thread.Sleep(5000);
+            Game.BomHasBeenPlanted = false;
+            Console.WriteLine("Bomben er desermert!");
+        }
+        public bool ScouteAllDeadTerroristAndDefusebomb(List<Terrorist> terrorist)
+        {
+            bool allTerroristIsDead = true;
+            foreach (var t in terrorist.Where(t => t.IsDead == false))
+            {
+                allTerroristIsDead = false;
+            }
+
+            if (allTerroristIsDead)
+            {
+                DefuseBomb();
+            }
+
+            return allTerroristIsDead;
         }
 
-       
         public void KillTerrorist(Terrorist terrorist)
         {
-            var successRate = Game.BomHasBeenPlanted ? 3 : 5;
+            var successRate = Game.BomHasBeenPlanted ? 2 : 3;
 
             if (IsSuccessful(successRate))
             {
-                //var terroristToDie = terrorist.FindLast(t => t.IsDead == false);
                 if (terrorist != null)
                 {
                     terrorist.IsDead = true;
-                    Console.WriteLine(terrorist.IsDead);
+                    Console.WriteLine(terrorist.Name + " is dead" + terrorist.IsDead);
+
                 }
             }
-
-            //if (Game.BomHasBeenPlanted == true)
-            //{
-            //    IsSuccessful(3);
-            //}
         }
     }
 }

@@ -6,7 +6,7 @@ namespace CSGO_oppgave
     {
         static void Main(string[] args)
         {
-            var random = new Random();
+            var game = new Game();
 
         }
     }
