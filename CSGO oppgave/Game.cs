@@ -129,11 +129,6 @@ namespace CSGO_oppgave
                     Console.WriteLine("ALLAHU AKBAR!!! Terroristene vinner.");
                 Environment.Exit(0);
             }
-            //else
-            //{
-            //    Console.WriteLine("Bomben har stoppet å tikke ned!");
-            //}
-
         }
     }
 }
